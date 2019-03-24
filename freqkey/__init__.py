@@ -53,9 +53,9 @@ class FreqKey:
 
         output = [
             f'Started: {self._start} (duration {now - self._start})',
-            '\nModifiers:',
+            '\n\nModifiers:\n',
             ctr_str(self._mod_ctr),
-            '\nCombos:',
+            '\n\nCombos:\n',
             ctr_str(self._combo_ctr)
             ]
         if filename:

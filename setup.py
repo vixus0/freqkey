@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="freqkey",
-    version="0.0.1",
+    version="0.0.2",
     author="Anshul Sirur",
     author_email="vixus0@gmail.com",
     description="Counts your keypresses",
