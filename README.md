@@ -1,3 +1,5 @@
+# freqkey
+
      _                   _             
     | |                 | |            
     | |  ,_    _   __,  | |   _        
@@ -7,7 +9,9 @@
     |/               |/ "freaky"    \| 
 
 
-# What do
+[![PyPI version](https://badge.fury.io/py/freqkey.svg)](https://badge.fury.io/py/freqkey)
+
+## What do
 
 Listens in on all your keypresses (without logging them consecutively, this is 
 not a keylogger) and generates a count that looks somewhat like this:
@@ -33,7 +37,7 @@ not a keylogger) and generates a count that looks somewhat like this:
       leftalt + 1                                                    1
       space                                                          1
 
-# Usage
+## Usage
 
     usage: freqkey [-h] [--out OUT] [--update UPDATE]
 
@@ -42,7 +46,7 @@ not a keylogger) and generates a count that looks somewhat like this:
       --out OUT        Output file, defaults to stdout
       --update UPDATE  Update frequency in seconds, defaults to 60
 
-# Problems
+## Problems
 
 I've only tested this on an Ubuntu Linux system. It should be cross-platform
 as it uses the [inputs](https://pypi.org/project/inputs) library to collect key
