@@ -1,11 +1,12 @@
 import setuptools
+from freqkey import __version__
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="freqkey",
-    version="0.0.2",
+    version=__version__,
     author="Anshul Sirur",
     author_email="vixus0@gmail.com",
     description="Counts your keypresses",

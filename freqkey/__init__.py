@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+__version__ = '0.0.3'
+
 from argparse import ArgumentParser
 from collections import Counter
 from datetime import datetime, timedelta
@@ -28,6 +30,7 @@ class FreqKey:
                 }
         self._mod_ctr = Counter()
         self._combo_ctr = Counter()
+        self._single_ctr = Counter()
         self._keebs = []
 
         for kb in devices.keyboards:
@@ -52,17 +55,21 @@ class FreqKey:
             return '\n'.join( fmt(k,v) for k,v in counter.most_common() )
 
         output = [
+            f'freqkey version {__version__}\n',
             f'Started: {self._start} (duration {now - self._start})',
             '\n\nModifiers:\n',
             ctr_str(self._mod_ctr),
             '\n\nCombos:\n',
-            ctr_str(self._combo_ctr)
+            ctr_str(self._combo_ctr),
+            '\n\nSingles:\n',
+            ctr_str(self._single_ctr),
             ]
+
         if filename:
             with open(filename, 'w') as file:
                 file.writelines(output)
         else:
-            print('\n'.join(output))
+            print(''.join(output))
 
     def main(self, args):
         print('Recording events')
@@ -83,10 +90,12 @@ class FreqKey:
                     else:
                         if ev.state == 0:
                             mods = self.getmods()
+                            combo = mods + (ev.code,)
                             if mods:
                                 self._mod_ctr.update([mods])
-                            combo = mods + (ev.code,)
-                            self._combo_ctr.update([combo])
+                                self._combo_ctr.update([combo])
+                            else:
+                                self._single_ctr.update([combo])
 
 def main():
     def mkupdt(sec):
@@ -95,6 +104,7 @@ def main():
     ap = ArgumentParser()
     ap.add_argument('--out', help='Output file, defaults to stdout')
     ap.add_argument('--update', help='Update frequency in seconds, defaults to 60', type=mkupdt, default=timedelta(seconds=60))
+    ap.add_argument('--version', action='version', version=__version__)
     args = ap.parse_args()
 
     fq = FreqKey()
